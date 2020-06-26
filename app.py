@@ -1,4 +1,5 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, render_template, redirect
+
 
 import pymongo
 
@@ -14,9 +15,23 @@ app = Flask(__name__)
 
 @app.route("/")
 def homepage():
-    """List available routes on homepage"""
-    return (
-        "Mars scrape"
+    article = db.mars_data.find_one({"item": "news_article"})
+    jpl_image = db.mars_data.find_one({"item": "jpl_image"})
+    weather = db.mars_data.find_one({"item": "weather"})
+    facts = db.mars_data.find_one({"item": "facts"})
+    hemispheres = db.mars_data.find_one({"item": "hemispheres"})
+
+    return render_template(
+        "index.html",
+        article_title = article['title'],
+        article_paragraph = article['paragraph'],
+        jpl_image_url = jpl_image['image_url'],
+        current_weather = weather['weather'],
+        facts_html = facts['facts'],
+        hemi_1 = hemispheres['hemispheres'][0]['img_url'],
+        hemi_2 = hemispheres['hemispheres'][1]['img_url'],
+        hemi_3 = hemispheres['hemispheres'][2]['img_url'],
+        hemi_4 = hemispheres['hemispheres'][3]['img_url']
     )
 
 @app.route("/scrape")
@@ -31,7 +46,7 @@ def scrape_route():
     # Insert newly scraped data
     db.mars_data.insert_many(data)
 
-    return("scrape complete")
+    return redirect("/")
 
 if __name__ == '__main__':
     app.run(debug=True)

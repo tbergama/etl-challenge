@@ -36,10 +36,9 @@ def scrape():
     paragraph = first_article.find('div', class_='article_teaser_body').text.strip()
 
     data.append({
-        'news_article': {
-            "title": title,
+        "item": "news_article",
+        "title": title,
         "paragraph": paragraph
-        }   
     })
     
     # ------ JPL Image -----
@@ -60,12 +59,11 @@ def scrape():
         soup = BeautifulSoup(browser.html, "html.parser")
         img_tag = soup.find("img", class_="fancybox-image")
         
-    img_url = img_tag['src']
+    img_url = "https://www.jpl.nasa.gov/"+img_tag['src']
 
     data.append({
-        "jpl_image": {
-            "url": img_url   
-        }
+        "item": "jpl_image",
+        "image_url": img_url
     })
 
     # ------ Weather ------
@@ -87,9 +85,8 @@ def scrape():
     weather = weather.text
 
     data.append({
-        "weather": {
-            "text": weather
-        }
+        "item": "weather",
+        "weather": weather
     })
 
     # ----- Facts ------
@@ -98,6 +95,7 @@ def scrape():
     facts_html = df_facts.to_html()
 
     data.append({
+        "item": "facts",
         "facts": facts_html
     })
 
@@ -120,6 +118,7 @@ def scrape():
     ]
 
     data.append({
+        "item": "hemispheres",
         "hemispheres": hemi_dicts
     })
 

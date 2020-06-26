@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Mars Scrape</title>
+</head>
+<body>
+    <div class="container">
+        
+        <!-- Title jumbotron and scrape button -->
+        <div class="row">
+            <div class="col-md-12 jumbotron">
+                <div class="row">
+                    <div class="col-md-4 offset-md-4">
+                        <h1>Mission to Mars</h1>
+                        <a style="margin-left: 60px" href="/scrape" role="button" class="btn btn-primary">Scrape New Data</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--  News article -->
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Latest Mars News</h2>
+                <h4>{{article_title}}</h4>
+                <p>{{article_paragraph}}</p>
+            </div>
+        </div>
+
+        <!-- Image, weather and facts -->
+        <div class="row">
+            <div class="col-md-8">
+                <h2>Featured Mars Image</h2>
+                <img src={{jpl_image_url}} alt="JPL Mars Image of the Day" class="img-fluid">
+            </div>
+            <div class="col-md-4">
+                <div class="card" style="padding: 10px">
+                    <h4>Current Weather on Mars</h4>
+                    <p>{{current_weather}}</p>
+                </div>
+                <div>
+                    <h4>Mars Facts</h4>
+                    {{facts_html|safe}}
+                </div>
+            </div>
+        </div>
+
+        <!-- Hemisphere pictures -->
+        <div class="row" style = "margin-top: 20px;">
+            <div class="col-md-4 offset-md-4">
+                <h4>Mars Hemispheres</h4>
+            </div>
+            <hr>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <img src={{hemi_1}} class="img-fluid">
+                </div>
+                <div class="col-md-6">
+                    <img src={{hemi_2}} class="img-fluid">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <img src={{hemi_3}} class="img-fluid">
+                </div>
+                <div class="col-md-6">
+                    <img src={{hemi_4}} class="img-fluid">
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</body>
+</html>
